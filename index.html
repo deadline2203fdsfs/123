@@ -1,0 +1,171 @@
+<html>
+    <head>
+        <title>Serial's heros wiki</title>
+        <meta charset = "utf-8">
+        <link href="https://fonts.googleapis.com/css?family=Trade+Winds&display=swap" rel="stylesheet">
+        <style>
+            .body
+            {
+                margin: -5px;
+            }
+            .image
+            {
+                background: url("rick.png") no-repeat;
+                background-size: 100%;
+                height: 100%;
+            }
+            .big-text
+            {
+                font-family: 'Trade Winds';
+                text-align: center;
+                font-size: 100px;
+                
+            }
+            .Button 
+            {
+                margin-top: 5%;
+                margin-left: 6%;
+                box-shadow: 0px 10px 14px -7px #276873;
+                background:linear-gradient(to bottom, #599bb3 5%, greenyellow 100%);
+                background-color:#599bb3;
+                border-radius:8px;
+                display:inline-block;
+                cursor:pointer;
+                color:#ffffff;
+                font-family:Arial;
+                font-size:20px;
+                font-weight:bold;
+                padding:13px 32px;
+                text-decoration:none;
+                text-shadow:0px 1px 0px #3d768a;
+                font-family: 'Trade Winds';
+            }
+            .Button:hover 
+            {
+                background:linear-gradient(to bottom, #408c99 5%, greenyellow 100%);
+                background-color: greenyellow;
+            }
+            .Button:active 
+            {
+                position:relative;
+                top:5px;
+            }
+            .row
+            {
+                font-family: 'Trade Winds';
+                margin-left: 5%;
+                border: 2px solid blue;
+                margin-top: 1px;
+                width: 15%;
+                color: cornsilk;
+            }
+            .row:hover
+            {
+                background-color: cornflowerblue;
+            }
+            .row:active
+            {
+                position:relative;
+                top:5px;
+            }
+            .interface
+            {
+                width: 30%;
+                height: 33.45%;
+                margin-left: 66%;
+                border: 3px solid red;
+                position: fixed;
+                margin-top: -25%; 
+            }
+            .image2 img
+            {
+                width: 30%;
+                padding: 5%;
+                float: left;
+            }
+            .text 
+            {
+                float: left;
+                margin-top: 10%;
+                font-size: 22px;
+                font-family: 'Trade Winds';
+                float: left;
+            }
+            .cross 
+            {
+                float: left;
+                width: 5%;
+                margin-left: 14%;
+                margin-top: 1px;
+            }
+            .hide
+            {
+                display: none;
+            }
+            .cross:hover
+            {
+                padding-top: 2px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class = "rick">
+            <div class = "image"><div class = "big-text">RICK AND MORTY</div>
+            <div class = "list">
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name </div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+                <div class = "row">1. Name</div>
+
+                <div class = "interface">
+                    <div class = image2><img src = "Rick.jpg"></div>
+                    <div class = "text">
+                        <div class = "name">NAME: Rick Sanches</div><br>
+                        <div class = "status">STATUS: Alive</div><br>
+                        <div class = "planet">PLANET: Earth</div><br>
+                    </div>
+                    <div class = "cross"><img src="close.svg"></div>
+                </div>
+
+            </div>
+            <div class = Button>+20 HERO'S</div>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('load', function()
+        {
+            let modal = document.querySelector('.interface');
+            let cross = document.querySelector('.cross');
+            let row = document.querySelectorAll('.row');
+            modal.classList.add('hide');
+            for (let i = 0; i < row.length; i++)
+            {
+                row[i].addEventListener('click', function()
+                {
+                    modal.classList.remove('hide');
+                })
+            }
+            cross.addEventListener('click', function()
+            {
+                modal.classList.add('hide');
+            })
+        })
+    </script>
+    </body>
+</html>
