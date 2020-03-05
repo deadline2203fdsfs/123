@@ -10,8 +10,8 @@
             }
             .image
             {
-                background: url("rick.png") no-repeat;
-                background-size: 100%;
+                background: url("rick.png") 50% 50% no-repeat fixed;
+                background-size: cover;
                 height: 100%;
             }
             .big-text
@@ -56,7 +56,7 @@
                 margin-left: 5%;
                 border: 2px solid blue;
                 margin-top: 1px;
-                width: 15%;
+                width: 20%;
                 color: cornsilk;
             }
             .row:hover
@@ -75,7 +75,7 @@
                 margin-left: 66%;
                 border: 3px solid red;
                 position: fixed;
-                margin-top: -25%; 
+                top: 39%;
             }
             .image2 img
             {
@@ -106,42 +106,42 @@
             {
                 padding-top: 2px;
             }
+            .number
+            {
+                margin-left: 5%;
+                color: #ffffff;
+                font-family: 'Trade Winds';
+            }
+            .total2
+            {
+                font-family: 'Trade Winds';
+            }
         </style>
     </head>
     <body>
         <div class = "rick">
             <div class = "image"><div class = "big-text">RICK AND MORTY</div>
             <div class = "list">
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name </div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-                <div class = "row">1. Name</div>
-
-                <div class = "interface">
-                    <div class = image2><img src = "Rick.jpg"></div>
-                    <div class = "text">
-                        <div class = "name">NAME: Rick Sanches</div><br>
-                        <div class = "status">STATUS: Alive</div><br>
-                        <div class = "planet">PLANET: Earth</div><br>
-                    </div>
-                    <div class = "cross"><img src="close.svg"></div>
+                <div class = "number">
+                    <span class = 'current'>--</span> <span>/</span> <span class = 'total'>---</span><br>
+                    <span class = 'total2'>Загрузка...</span>
                 </div>
+                <div class = "listItems">
+                    
+                </div>
+
+                <div class="modal-body">
+                    <div class="avatar">
+                      <img class="avatar-img" src="https://rickandmortyapi.com/api/character/avatar/1.jpeg" alt="">
+                    </div>
+                    <div class="description">
+                      <h2 class="char-name">Rick Sanchez</h2>
+                      <p><b>status</b>: <span class="status">Alive</span></p>
+                      <p><b>species</b>: <span class="species">Human</span></p>
+                      <p><b>gender</b>: <span class="gender">Male</span></p>
+                      <p><b>origin</b>: <span class="origin">Earth</span></p>
+                    </div>
+                  </div>
 
             </div>
             <div class = Button>+20 HERO'S</div>
@@ -150,22 +150,110 @@
     <script>
         window.addEventListener('load', function()
         {
-            let modal = document.querySelector('.interface');
+            let modal = document.querySelector('.modal-body');
             let cross = document.querySelector('.cross');
-            let row = document.querySelectorAll('.row');
-            modal.classList.add('hide');
+            let row = document.querySelectorAll('.listItems');
+            let rawData = null
+            let list = []
+            let info = null
+            
             for (let i = 0; i < row.length; i++)
             {
                 row[i].addEventListener('click', function()
                 {
-                    modal.classList.remove('hide');
+                    showModal(i);
                 })
             }
             cross.addEventListener('click', function()
             {
                 modal.classList.add('hide');
             })
+            function showModal (id, e)
+                {
+                    let char = list[id];
+                    console.log(list, id)
+                    document.querySelector('.name').innerText = char.name;
+                    document.querySelector('.status').innerText = char.status;
+                    document.querySelector('.planet').innerText = char.name;
+                    document.querySelector('.image2').setAttribute('src');
+                    modal.classList.remove('hide');
+                }
         })
+        window.onload = function()
+        {
+            fetch(`https://rickandmortyapi.com/api/character/`)
+                .then(response => {
+                    console.log(response)
+                    if (response.status !== 200)
+                    {
+                        console.log('sorry, error...')
+                    }
+                    else
+                    {
+                        return response.json();
+                    }
+                })
+                .then(json => renderList(json))
+                .catch(err => console.log(err))
+                
+            function renderList(data){
+                rawData = data 
+                list = [...rawData.results]
+                info = rawData.info
+                document.querySelector('.total').innerText = info.count
+                document.querySelector('.current').innerText = list.length
+                document.querySelector('.total2').innerText = ' '
+                for (let i = 0; i < list.length; i++)
+                {
+                    // console.log(list[i]);
+                }
+                const listContainer = document.querySelector('.listItems')
+                
+                
+                
+                function showModal (id, e) {
+                    let char = list[id]
+
+                    document.querySelector('.window-title').innerText = char.name
+                    document.querySelector('.char-name').innerText = char.name
+                    document.querySelector('.status').innerText = char.status
+                    document.querySelector('.species').innerText = char.species
+                    document.querySelector('.gender').innerText = char.gender
+                    document.querySelector('.origin').innerText = char.origin.name
+                    
+                    document.querySelector('.avatar-img').setAttribute('src', char.image)
+
+                    document.querySelector('#modal').classList.remove('hide')
+                }
+
+                let htmlList = document.querySelectorAll('.list-item')
+
+                htmlList.forEach(el => {
+                    el.addEventListener('click', e => {
+                        console.log(el)
+                    })
+                })
+            }
+            let count = 1;
+            let plus = document.querySelector('.Button');
+            plus.addEventListener('click', function()
+            {
+                count+=1;
+                fetch(`https://rickandmortyapi.com/api/character/?page=` + count)
+                .then(response => {
+                    console.log(response)
+                    if (response.status !== 200)
+                    {
+                        console.log('sorry, error...')
+                    }
+                    else
+                    {
+                        return response.json();
+                    }
+                })
+                .then(json => renderList(json))
+            })
+        };
     </script>
     </body>
 </html>
